@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('url_image')->nullable();
             $table->text('body');
 
-            $table->foreignUuid('user_id')->references('id')->references('users')->onDelete('cascade');
+            $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->softDeletes();
             $table->timestamps();
