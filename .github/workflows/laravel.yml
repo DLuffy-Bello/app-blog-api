@@ -42,11 +42,10 @@ jobs:
       - name: Copy .env
         run: cp .env.example .env
 
-      - name: Generate application key
-        run: php artisan key:generate
-
-      - name: Cache configuration
-        run: php artisan config:cache
+      - name: Configure environment
+        run: |
+          php artisan key:generate
+          php artisan config:clear
 
       - name: Wait for PostgreSQL to be ready
         run: |
@@ -73,4 +72,5 @@ jobs:
           DB_DATABASE: blog
           DB_USERNAME: postgres
           DB_PASSWORD: postgres
+          APP_ENV: testing
         run: ./vendor/bin/phpunit
