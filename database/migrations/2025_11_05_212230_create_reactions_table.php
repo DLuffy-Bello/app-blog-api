@@ -15,8 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('type');
 
-            $table->uuid('post_id');
-            $table->foreignId('post_id')->references('id')->on('posts')->onDelete('cascade');
+            $table->foreignUuid('post_id')->references('id')->on('posts')->onDelete('cascade');
 
             $table->timestamps();
         });

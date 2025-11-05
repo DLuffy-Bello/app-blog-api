@@ -15,11 +15,9 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->text('comment');
 
-            $table->uuid('user_id');
-            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
 
-            $table->uuid('post_id');
-            $table->foreignId('post_id')->references('id')->on('posts')->onDelete('cascade');
+            $table->foreignUuid('post_id')->references('id')->on('posts')->onDelete('cascade');
 
             $table->softDeletes();
             $table->timestamps();
