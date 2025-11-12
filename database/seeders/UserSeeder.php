@@ -20,5 +20,13 @@ class UserSeeder extends Seeder
             'password' => bcrypt('password'),
             'role_id' => '38721af0-1743-43bd-b025-0aa074c6e890',
         ]);
+
+        User::create([
+            'id' => '9446912a-3a90-4dc9-b277-80c7480a27a7',
+            'name' => 'Student User',
+            'email' => 'student@example.com',
+            'password' => bcrypt('password'),
+            'role_id' => '38721af0-1743-43bd-b025-0aa074c6e890',
+        ]);
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\PostCreated;
 use App\Http\Requests\StorePostRequest;
-use App\Models\Post;
+use App\Services\PostService;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -12,7 +12,7 @@ class PostController extends Controller
 
     protected $postService;
 
-    public function __construct(\App\Services\PostService $postService)
+    public function __construct(PostService $postService)
     {
         $this->postService = $postService;
     }
@@ -32,6 +32,13 @@ class PostController extends Controller
         $post = $this->postService->createPost($request->all());
         broadcast(new PostCreated($post));
         return response()->json(['message' => 'Post created', 'data' => $post], 201);
+    }
+
+    public function allPosts(Request $request)
+    {
+        $userId = $request->header('X-User-ID');
+        $posts = $this->postService->getAllPosts($userId);
+        return response()->json(['data' => $posts], 200);
     }
 
     public function update(Request $request, $id)

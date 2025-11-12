@@ -21,4 +21,14 @@ class Post extends Model
         'type',
         'url_image',
     ];
+
+    /**
+     *
+     */
+    public function isLikedByUser(string $userId): bool
+    {
+        return Reaction::where('post_id', $this->id)
+            ->where('user_id', $userId)
+            ->exists();
+    }
 }
