@@ -30,7 +30,6 @@ class PostController extends Controller
     public function store(StorePostRequest $request)
     {
         $post = $this->postService->createPost($request->all());
-        broadcast(new PostCreated($post));
         return response()->json(['message' => 'Post created', 'data' => $post], 201);
     }
 

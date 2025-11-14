@@ -21,4 +21,5 @@ Route::prefix('reactions')->group(function () {
 
 Route::prefix('comments')->group(function () {
     Route::get('/{id}', [CommentController::class, 'show']);
+    Route::post('/', [CommentController::class, 'store']);
 });

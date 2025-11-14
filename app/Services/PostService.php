@@ -24,7 +24,7 @@ class PostService
      */
     public function getAllPosts(string $userId): Collection
     {
-        $posts = Post::all();
+        $posts = Post::orderBy('created_at', 'asc')->get();
         return $posts->map(function (Post $post) use ($userId) {
             $post->liked_by_user = $post->isLikedByUser($userId);
             return $post;

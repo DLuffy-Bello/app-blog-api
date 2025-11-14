@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CommentCreated;
 use App\Http\Requests\StoreCommentRequest;
 use App\Services\CommentService;
 use Illuminate\Http\Request;
@@ -17,8 +18,10 @@ class CommentController extends Controller
 
     public function store (StoreCommentRequest $request)
     {
-        $result = $this->commentService->createComment($request->all());
-        return response()->json(['data' => $result], 201);
+        $data = array_merge($request->all(), ['user_id' => $request->header('X-User-ID')]);
+        $result = $this->commentService->createComment($data);
+        broadcast(new CommentCreated($result));
+        return response()->json(['data' => (bool)$result], 201);
     }
 
     public function show (string $id)
